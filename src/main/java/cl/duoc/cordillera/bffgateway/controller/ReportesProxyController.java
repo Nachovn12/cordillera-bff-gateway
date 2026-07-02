@@ -167,6 +167,6 @@ public class ReportesProxyController {
     }
 
     private String reportesUrl() {
-        return reportServiceUrl.replaceAll("/+$", "") + "/api/reportes";
+        return reportServiceUrl.replaceAll("/+$", "") + "/api/v1/reportes";
     }
 }

@@ -155,6 +155,6 @@ public class KpisProxyController {
     }
 
     private String kpisUrl() {
-        return kpiServiceUrl.replaceAll("/+$", "") + "/api/kpis";
+        return kpiServiceUrl.replaceAll("/+$", "") + "/api/v1/kpis";
     }
 }

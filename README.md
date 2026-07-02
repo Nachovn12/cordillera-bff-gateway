@@ -102,9 +102,9 @@ CorsConfig
 | GET    | `/api/dashboard/sucursal/{id}` | Consulta datos por sucursal desde Data Service.  |
 | GET    | `/api/dashboard/alertas`       | Obtiene alertas operacionales para el frontend.  |
 | GET    | `/api/dashboard/services`      | Informa estado de servicios integrados.          |
-| GET    | `/api/reportes`                | Consulta reportes desde Report Service.          |
-| POST   | `/api/reportes/generar`        | Genera reportes mediante Report Service.         |
-| GET    | `/api/reportes/{id}/exportar`  | Exporta reportes mediante Report Service.        |
+| GET    | `/api/v1/reportes`                | Consulta reportes desde Report Service.          |
+| POST   | `/api/v1/reportes/generar`        | Genera reportes mediante Report Service.         |
+| GET    | `/api/v1/reportes/{id}/exportar`  | Exporta reportes mediante Report Service.        |
 | GET    | `/api/configuracion`           | Consulta configuración usada por el frontend.    |
 | PUT    | `/api/configuracion`           | Actualiza configuración expuesta por el BFF.     |
 

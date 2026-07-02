@@ -79,9 +79,9 @@ class DashboardServiceTest {
     @Test
     void getDashboard_conTodosLosServiciosOnline_retornaStatusOperativo() {
         // Arrange
-        mockEndpoint("http://localhost:8084/api/kpis");
-        mockEndpoint("http://localhost:8083/api/datos");
-        mockEndpoint("http://localhost:8085/api/reportes");
+        mockEndpoint("http://localhost:8084/api/v1/kpis");
+        mockEndpoint("http://localhost:8083/api/v1/datos");
+        mockEndpoint("http://localhost:8085/api/v1/reportes");
 
         // Act
         DashboardResponse response = dashboardService.getDashboard();
@@ -94,9 +94,9 @@ class DashboardServiceTest {
     @Test
     void getDashboard_conKpiServiceCaido_retornaStatusDegradado() {
         // Arrange
-        mockEndpointFallando("http://localhost:8084/api/kpis");
-        mockEndpoint("http://localhost:8083/api/datos");
-        mockEndpoint("http://localhost:8085/api/reportes");
+        mockEndpointFallando("http://localhost:8084/api/v1/kpis");
+        mockEndpoint("http://localhost:8083/api/v1/datos");
+        mockEndpoint("http://localhost:8085/api/v1/reportes");
 
         // Act
         DashboardResponse response = dashboardService.getDashboard();
@@ -110,9 +110,9 @@ class DashboardServiceTest {
     @Test
     void getDashboard_cuandoTodosLosMicroserviciosFallan_debeRetornarStatusDegradado() {
         // Arrange
-        mockEndpointFallando("http://localhost:8084/api/kpis");
-        mockEndpointFallando("http://localhost:8083/api/datos");
-        mockEndpointFallando("http://localhost:8085/api/reportes");
+        mockEndpointFallando("http://localhost:8084/api/v1/kpis");
+        mockEndpointFallando("http://localhost:8083/api/v1/datos");
+        mockEndpointFallando("http://localhost:8085/api/v1/reportes");
 
         // Act
         DashboardResponse response = dashboardService.getDashboard();
@@ -125,10 +125,10 @@ class DashboardServiceTest {
     @Test
     void getDashboard_cuandoDataServiceTieneDatos_debeAgregarAlertaInformativa() {
         // Arrange
-        mockEndpoint("http://localhost:8084/api/kpis");
-        mockEndpointWithData("http://localhost:8083/api/datos",
+        mockEndpoint("http://localhost:8084/api/v1/kpis");
+        mockEndpointWithData("http://localhost:8083/api/v1/datos",
                 List.of(Map.of("id", 1, "sistemaOrigen", "POS")));
-        mockEndpoint("http://localhost:8085/api/reportes");
+        mockEndpoint("http://localhost:8085/api/v1/reportes");
 
         // Act
         DashboardResponse response = dashboardService.getDashboard();
@@ -146,7 +146,7 @@ class DashboardServiceTest {
     @Test
     void getDashboardKpis_cuandoKpiServiceResponde_debeRetornarKpis() {
         // Arrange
-        mockEndpoint("http://localhost:8084/api/kpis");
+        mockEndpoint("http://localhost:8084/api/v1/kpis");
 
         // Act
         DashboardResponse response = dashboardService.getDashboardKpis();
@@ -160,7 +160,7 @@ class DashboardServiceTest {
     @Test
     void getDashboardKpis_cuandoKpiServiceFalla_debeRetornarDegradado() {
         // Arrange
-        mockEndpointFallando("http://localhost:8084/api/kpis");
+        mockEndpointFallando("http://localhost:8084/api/v1/kpis");
 
         // Act
         DashboardResponse response = dashboardService.getDashboardKpis();
@@ -177,10 +177,10 @@ class DashboardServiceTest {
     @Test
     void getDashboardSucursal_conSucursalValida_retornaFiltroCorrecto() {
         // Arrange
-        mockEndpoint("http://localhost:8084/api/kpis");
-        mockEndpointWithData("http://localhost:8083/api/datos/sucursal/1",
+        mockEndpoint("http://localhost:8084/api/v1/kpis");
+        mockEndpointWithData("http://localhost:8083/api/v1/datos/sucursal/1",
                 List.of(Map.of("id", 1, "sistemaOrigen", "POS", "valor", "150000")));
-        mockEndpoint("http://localhost:8085/api/reportes");
+        mockEndpoint("http://localhost:8085/api/v1/reportes");
 
         // Act
         DashboardResponse response = dashboardService.getDashboardSucursal(1L);
@@ -193,9 +193,9 @@ class DashboardServiceTest {
     @Test
     void getDashboardSucursal_cuandoSucursalSinDatos_debeAgregarAlertaAdvertencia() {
         // Arrange — data service responde pero lista vacía
-        mockEndpoint("http://localhost:8084/api/kpis");
-        mockEndpoint("http://localhost:8083/api/datos/sucursal/99");
-        mockEndpoint("http://localhost:8085/api/reportes");
+        mockEndpoint("http://localhost:8084/api/v1/kpis");
+        mockEndpoint("http://localhost:8083/api/v1/datos/sucursal/99");
+        mockEndpoint("http://localhost:8085/api/v1/reportes");
 
         // Act
         DashboardResponse response = dashboardService.getDashboardSucursal(99L);
@@ -208,9 +208,9 @@ class DashboardServiceTest {
     @Test
     void getDashboardSucursal_cuandoDataServiceFalla_debeRetornarDegradado() {
         // Arrange
-        mockEndpoint("http://localhost:8084/api/kpis");
-        mockEndpointFallando("http://localhost:8083/api/datos/sucursal/2");
-        mockEndpoint("http://localhost:8085/api/reportes");
+        mockEndpoint("http://localhost:8084/api/v1/kpis");
+        mockEndpointFallando("http://localhost:8083/api/v1/datos/sucursal/2");
+        mockEndpoint("http://localhost:8085/api/v1/reportes");
 
         // Act
         DashboardResponse response = dashboardService.getDashboardSucursal(2L);
@@ -227,9 +227,9 @@ class DashboardServiceTest {
     @Test
     void getAlertas_cuandoTodosOperativos_debeRetornarAlertaInformativaBff() {
         // Arrange
-        mockEndpoint("http://localhost:8084/api/kpis");
-        mockEndpoint("http://localhost:8083/api/datos");
-        mockEndpoint("http://localhost:8085/api/reportes");
+        mockEndpoint("http://localhost:8084/api/v1/kpis");
+        mockEndpoint("http://localhost:8083/api/v1/datos");
+        mockEndpoint("http://localhost:8085/api/v1/reportes");
 
         // Act
         Map<String, Object> alertas = dashboardService.getAlertas();
@@ -244,9 +244,9 @@ class DashboardServiceTest {
     @Test
     void getAlertas_cuandoKpiServiceFalla_debeContenerAlertaCritica() {
         // Arrange
-        mockEndpointFallando("http://localhost:8084/api/kpis");
-        mockEndpoint("http://localhost:8083/api/datos");
-        mockEndpoint("http://localhost:8085/api/reportes");
+        mockEndpointFallando("http://localhost:8084/api/v1/kpis");
+        mockEndpoint("http://localhost:8083/api/v1/datos");
+        mockEndpoint("http://localhost:8085/api/v1/reportes");
 
         // Act
         Map<String, Object> resultado = dashboardService.getAlertas();
@@ -264,9 +264,9 @@ class DashboardServiceTest {
     @Test
     void getServices_cuandoTodosOperativos_debeRetornar4Servicios() {
         // Arrange
-        mockEndpoint("http://localhost:8083/api/datos");
-        mockEndpoint("http://localhost:8084/api/kpis");
-        mockEndpoint("http://localhost:8085/api/reportes");
+        mockEndpoint("http://localhost:8083/api/v1/datos");
+        mockEndpoint("http://localhost:8084/api/v1/kpis");
+        mockEndpoint("http://localhost:8085/api/v1/reportes");
 
         // Act
         Map<String, Object> services = dashboardService.getServices();
@@ -281,9 +281,9 @@ class DashboardServiceTest {
     @Test
     void getServices_cuandoDataServiceFalla_debeIncluirIncidente() {
         // Arrange
-        mockEndpointFallando("http://localhost:8083/api/datos");
-        mockEndpoint("http://localhost:8084/api/kpis");
-        mockEndpoint("http://localhost:8085/api/reportes");
+        mockEndpointFallando("http://localhost:8083/api/v1/datos");
+        mockEndpoint("http://localhost:8084/api/v1/kpis");
+        mockEndpoint("http://localhost:8085/api/v1/reportes");
 
         // Act
         Map<String, Object> services = dashboardService.getServices();
@@ -301,9 +301,9 @@ class DashboardServiceTest {
     @Test
     void obtenerDashboard_todosOnline_retornaStatusOperativo() {
         // Arrange
-        mockEndpoint("http://localhost:8084/api/kpis");
-        mockEndpoint("http://localhost:8083/api/datos");
-        mockEndpoint("http://localhost:8085/api/reportes");
+        mockEndpoint("http://localhost:8084/api/v1/kpis");
+        mockEndpoint("http://localhost:8083/api/v1/datos");
+        mockEndpoint("http://localhost:8085/api/v1/reportes");
 
         // Act
         DashboardResponse response = dashboardService.getDashboard();
@@ -316,9 +316,9 @@ class DashboardServiceTest {
     @SuppressWarnings("unchecked")
     void obtenerDashboard_kpiServiceCaido_retornaStatusDegradado() {
         // Arrange
-        mockEndpointFallando("http://localhost:8084/api/kpis");
-        mockEndpoint("http://localhost:8083/api/datos");
-        mockEndpoint("http://localhost:8085/api/reportes");
+        mockEndpointFallando("http://localhost:8084/api/v1/kpis");
+        mockEndpoint("http://localhost:8083/api/v1/datos");
+        mockEndpoint("http://localhost:8085/api/v1/reportes");
 
         // Act
         DashboardResponse response = dashboardService.getDashboard();
@@ -334,9 +334,9 @@ class DashboardServiceTest {
     @SuppressWarnings("unchecked")
     void obtenerDashboard_todosLosServiciosCaidos_retorna3Alertas() {
         // Arrange
-        mockEndpointFallando("http://localhost:8084/api/kpis");
-        mockEndpointFallando("http://localhost:8083/api/datos");
-        mockEndpointFallando("http://localhost:8085/api/reportes");
+        mockEndpointFallando("http://localhost:8084/api/v1/kpis");
+        mockEndpointFallando("http://localhost:8083/api/v1/datos");
+        mockEndpointFallando("http://localhost:8085/api/v1/reportes");
 
         // Act
         DashboardResponse response = dashboardService.getDashboard();

@@ -165,6 +165,6 @@ public class DatosProxyController {
     }
 
     private String datosUrl() {
-        return dataServiceUrl.replaceAll("/+$", "") + "/api/datos";
+        return dataServiceUrl.replaceAll("/+$", "") + "/api/v1/datos";
     }
 }

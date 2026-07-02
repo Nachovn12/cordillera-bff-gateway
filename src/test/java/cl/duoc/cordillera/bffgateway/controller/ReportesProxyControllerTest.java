@@ -60,7 +60,7 @@ class ReportesProxyControllerTest {
         mockMvc.perform(get("/api/v1/reportes"))
                 .andExpect(status().isOk());
 
-        verify(restTemplate).exchange(contains("/api/reportes"), eq(HttpMethod.GET), isNull(), eq(Object.class));
+        verify(restTemplate).exchange(contains("/api/v1/reportes"), eq(HttpMethod.GET), isNull(), eq(Object.class));
     }
 
     // -------------------------------------------------------
@@ -80,7 +80,7 @@ class ReportesProxyControllerTest {
                         .content(objectMapper.writeValueAsString(payload)))
                 .andExpect(status().isCreated());
 
-        verify(restTemplate).postForEntity(contains("/api/reportes"), any(), eq(Object.class));
+        verify(restTemplate).postForEntity(contains("/api/v1/reportes"), any(), eq(Object.class));
     }
 
     // -------------------------------------------------------
@@ -100,7 +100,7 @@ class ReportesProxyControllerTest {
                         .content(objectMapper.writeValueAsString(payload)))
                 .andExpect(status().isOk());
 
-        verify(restTemplate).postForEntity(contains("/api/reportes/generar"), any(), eq(Object.class));
+        verify(restTemplate).postForEntity(contains("/api/v1/reportes/generar"), any(), eq(Object.class));
     }
 
     // -------------------------------------------------------

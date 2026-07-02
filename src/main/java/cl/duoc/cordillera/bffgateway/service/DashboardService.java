@@ -34,9 +34,9 @@ public class DashboardService {
     }
 
     public DashboardResponse getDashboard() {
-        FetchResult kpiResult = fetchList(kpiServiceUrl + "/api/kpis", "KPI Service");
-        FetchResult dataResult = fetchList(dataServiceUrl + "/api/datos", "Data Service");
-        FetchResult reportResult = fetchList(reportServiceUrl + "/api/reportes", "Report Service");
+        FetchResult kpiResult = fetchList(kpiServiceUrl + "/api/v1/kpis", "KPI Service");
+        FetchResult dataResult = fetchList(dataServiceUrl + "/api/v1/datos", "Data Service");
+        FetchResult reportResult = fetchList(reportServiceUrl + "/api/v1/reportes", "Report Service");
 
         List<Map<String, Object>> alertas = new ArrayList<>();
         addAlertIfFailed(alertas, "kpi-service", "KPI Service", kpiResult);
@@ -72,7 +72,7 @@ public class DashboardService {
     }
 
     public DashboardResponse getDashboardKpis() {
-        FetchResult kpiResult = fetchList(kpiServiceUrl + "/api/kpis", "KPI Service");
+        FetchResult kpiResult = fetchList(kpiServiceUrl + "/api/v1/kpis", "KPI Service");
 
         List<Map<String, Object>> alertas = new ArrayList<>();
         addAlertIfFailed(alertas, "kpi-service", "KPI Service", kpiResult);
@@ -83,9 +83,9 @@ public class DashboardService {
     }
 
     public DashboardResponse getDashboardSucursal(Long id) {
-        FetchResult kpiResult = fetchList(kpiServiceUrl + "/api/kpis", "KPI Service");
-        FetchResult dataResult = fetchList(dataServiceUrl + "/api/datos/sucursal/" + id, "Data Service");
-        FetchResult reportResult = fetchList(reportServiceUrl + "/api/reportes", "Report Service");
+        FetchResult kpiResult = fetchList(kpiServiceUrl + "/api/v1/kpis", "KPI Service");
+        FetchResult dataResult = fetchList(dataServiceUrl + "/api/v1/datos/sucursal/" + id, "Data Service");
+        FetchResult reportResult = fetchList(reportServiceUrl + "/api/v1/reportes", "Report Service");
 
         List<Map<String, Object>> alertas = new ArrayList<>();
         addAlertIfFailed(alertas, "kpi-service", "KPI Service", kpiResult);
@@ -132,9 +132,9 @@ public class DashboardService {
     }
 
     public Map<String, Object> getAlertas() {
-        FetchResult kpiResult = fetchList(kpiServiceUrl + "/api/kpis", "KPI Service");
-        FetchResult dataResult = fetchList(dataServiceUrl + "/api/datos", "Data Service");
-        FetchResult reportResult = fetchList(reportServiceUrl + "/api/reportes", "Report Service");
+        FetchResult kpiResult = fetchList(kpiServiceUrl + "/api/v1/kpis", "KPI Service");
+        FetchResult dataResult = fetchList(dataServiceUrl + "/api/v1/datos", "Data Service");
+        FetchResult reportResult = fetchList(reportServiceUrl + "/api/v1/reportes", "Report Service");
 
         List<Map<String, Object>> alertas = new ArrayList<>();
 
@@ -168,11 +168,11 @@ public class DashboardService {
                 "Punto de entrada del frontend", 12, 100));
 
         addRemoteServiceStatus(services, "data-service", "Data Service",
-                "Datos operacionales", dataServiceUrl + "/api/datos");
+                "Datos operacionales", dataServiceUrl + "/api/v1/datos");
         addRemoteServiceStatus(services, "kpi-service", "KPI Service",
-                "Indicadores ejecutivos", kpiServiceUrl + "/api/kpis");
+                "Indicadores ejecutivos", kpiServiceUrl + "/api/v1/kpis");
         addRemoteServiceStatus(services, "report-service", "Report Service",
-                "Reportes ejecutivos", reportServiceUrl + "/api/reportes");
+                "Reportes ejecutivos", reportServiceUrl + "/api/v1/reportes");
 
         List<Map<String, Object>> incidents = services.stream()
                 .filter(service -> !"Operativo".equals(service.get("estado")))

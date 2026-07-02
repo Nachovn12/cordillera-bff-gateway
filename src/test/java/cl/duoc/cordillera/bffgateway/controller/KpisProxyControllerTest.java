@@ -60,7 +60,7 @@ class KpisProxyControllerTest {
         mockMvc.perform(get("/api/v1/kpis"))
                 .andExpect(status().isOk());
 
-        verify(restTemplate).exchange(contains("/api/kpis"), eq(HttpMethod.GET), isNull(), eq(Object.class));
+        verify(restTemplate).exchange(contains("/api/v1/kpis"), eq(HttpMethod.GET), isNull(), eq(Object.class));
     }
 
     // -------------------------------------------------------
@@ -77,7 +77,7 @@ class KpisProxyControllerTest {
         mockMvc.perform(get("/api/v1/kpis/1"))
                 .andExpect(status().isOk());
 
-        verify(restTemplate).exchange(contains("/api/kpis/1"), eq(HttpMethod.GET), isNull(), eq(Object.class));
+        verify(restTemplate).exchange(contains("/api/v1/kpis/1"), eq(HttpMethod.GET), isNull(), eq(Object.class));
     }
 
     // -------------------------------------------------------
@@ -97,7 +97,7 @@ class KpisProxyControllerTest {
                         .content(objectMapper.writeValueAsString(payload)))
                 .andExpect(status().isCreated());
 
-        verify(restTemplate).postForEntity(contains("/api/kpis"), any(), eq(Object.class));
+        verify(restTemplate).postForEntity(contains("/api/v1/kpis"), any(), eq(Object.class));
     }
 
     // -------------------------------------------------------
@@ -117,7 +117,7 @@ class KpisProxyControllerTest {
                         .content(objectMapper.writeValueAsString(payload)))
                 .andExpect(status().isOk());
 
-        verify(restTemplate).exchange(contains("/api/kpis/1"), eq(HttpMethod.PUT), any(), eq(Object.class));
+        verify(restTemplate).exchange(contains("/api/v1/kpis/1"), eq(HttpMethod.PUT), any(), eq(Object.class));
     }
 
     // -------------------------------------------------------
@@ -133,7 +133,7 @@ class KpisProxyControllerTest {
         mockMvc.perform(delete("/api/v1/kpis/1"))
                 .andExpect(status().isNoContent());
 
-        verify(restTemplate).delete(contains("/api/kpis/1"));
+        verify(restTemplate).delete(contains("/api/v1/kpis/1"));
     }
 
     // -------------------------------------------------------
